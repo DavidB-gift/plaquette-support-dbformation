@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Post-Formation — DB FORMATION</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ───── Design Tokens ───── */
+    :root {
+      --color-bg:             #f7f6f2;
+      --color-surface:        #ffffff;
+      --color-surface-2:      #f3f0ec;
+      --color-border:         #e2dfd8;
+      --color-text:           #28251d;
+      --color-text-muted:     #6b6860;
+      --color-text-faint:     #aaa9a4;
+      --color-primary:        #01696f;
+      --color-primary-hover:  #0c4e54;
+      --color-primary-light:  #e8f2f2;
+      --color-accent:         #b35900;
+      --color-accent-light:   #fdf0e6;
+      --color-success:        #2e5c10;
+      --color-success-light:  #edf5e8;
+
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1.25rem;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 3px oklch(0.2 0.01 80 / 0.07);
+      --shadow-md: 0 4px 16px oklch(0.2 0.01 80 / 0.09);
+    }
+
+    /* ───── Reset ───── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.65;
+    }
+    img { display: block; max-width: 100%; }
+    table { border-collapse: collapse; width: 100%; }
+    p { max-width: 70ch; }
+
+    /* ───── Layout ───── */
+    .wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-4);
+    }
+
+    /* ───── Header ───── */
+    .header {
+      background: var(--color-text);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8) var(--space-10);
+      margin-bottom: var(--space-8);
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, oklch(0.55 0.12 192 / 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      background: var(--color-primary);
+      border-radius: var(--radius-lg);
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.875rem;
+      color: #fff;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .badge {
+      margin-left: auto;
+      background: oklch(1 0 0 / 0.1);
+      color: oklch(1 0 0 / 0.7);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2em 0.8em;
+      border-radius: var(--radius-full);
+      border: 1px solid oklch(1 0 0 / 0.15);
+    }
+    .header-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-2);
+    }
+    .header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: var(--space-4);
+    }
+    .header h1 em {
+      font-style: italic;
+      color: oklch(0.72 0.08 192);
+    }
+    .header-sub {
+      color: oklch(1 0 0 / 0.6);
+      font-size: 0.95rem;
+      max-width: 52ch;
+    }
+
+    /* ───── Problem/Solution ───── */
+    .problem-solution {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    @media (max-width: 540px) {
+      .problem-solution { grid-template-columns: 1fr; }
+    }
+    .ps-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+    .ps-card.solution {
+      background: var(--color-primary-light);
+      border-color: oklch(from var(--color-primary) l c h / 0.2);
+    }
+    .ps-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-3);
+    }
+    .ps-card:not(.solution) .ps-label { color: var(--color-text-muted); }
+    .ps-card.solution .ps-label { color: var(--color-primary); }
+    .ps-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+    .ps-card.solution p { color: var(--color-text); }
+
+    /* ───── Section titles ───── */
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+      line-height: 1.2;
+    }
+
+    /* ───── Benefit list ───── */
+    .benefits {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-sm);
+    }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .benefit-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .benefit-item:first-child { padding-top: 0; }
+    .benefit-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px; height: 32px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-md);
+      flex-shrink: 0;
+      color: var(--color-primary);
+      font-size: 0.9rem;
+    }
+    .benefit-content strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.1em;
+    }
+    .benefit-content span {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ───── Pricing table ───── */
+    .pricing-wrap {
+      margin-bottom: var(--space-8);
+    }
+    .pricing-table {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .pricing-table thead tr {
+      background: var(--color-text);
+    }
+    .pricing-table thead th {
+      padding: var(--space-3) var(--space-4);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: oklch(1 0 0 / 0.7);
+      text-align: left;
+    }
+    .pricing-table thead th:not(:first-child) {
+      text-align: center;
+      color: oklch(0.72 0.08 192);
+    }
+    .pricing-table tbody tr {
+      border-bottom: 1px solid var(--color-border);
+      transition: background 0.15s;
+    }
+    .pricing-table tbody tr:last-child { border-bottom: none; }
+    .pricing-table tbody tr:hover { background: var(--color-surface-2); }
+    .pricing-table td {
+      padding: var(--space-3) var(--space-4);
+      font-size: 0.875rem;
+      vertical-align: middle;
+    }
+    .pricing-table td:first-child {
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .pricing-table td:not(:first-child) {
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      color: var(--color-text-muted);
+    }
+    .tier-best {
+      font-weight: 600;
+      color: var(--color-primary) !important;
+    }
+    .pricing-note {
+      margin-top: var(--space-3);
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* ───── Saving callout ───── */
+    .saving-callout {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      background: var(--color-accent-light);
+      border: 1px solid oklch(from var(--color-accent) l c h / 0.2);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-5);
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    .saving-callout .callout-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .saving-callout .callout-text {
+      font-size: 0.875rem;
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+    .saving-callout strong { color: var(--color-accent); }
+
+    /* ───── Comparatif ───── */
+    .compare-wrap {
+      margin-bottom: var(--space-8);
+    }
+    .compare-table {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .compare-table thead tr {
+      background: var(--color-surface-2);
+    }
+    .compare-table thead th {
+      padding: var(--space-3) var(--space-4);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      text-align: left;
+    }
+    .compare-table thead th:nth-child(2) { color: var(--color-primary); }
+    .compare-table tbody tr {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .compare-table tbody tr:last-child { border-bottom: none; }
+    .compare-table td {
+      padding: var(--space-3) var(--space-4);
+      font-size: 0.875rem;
+      vertical-align: middle;
+    }
+    .compare-table td:first-child {
+      font-weight: 500;
+      color: var(--color-text-muted);
+      width: 38%;
+    }
+    .compare-table td.good {
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+    .compare-table td.neutral {
+      color: var(--color-text-muted);
+      font-size: 0.825rem;
+    }
+
+    /* ───── Steps ───── */
+    .steps {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-bottom: var(--space-8);
+      box-shadow: var(--shadow-sm);
+    }
+    .step {
+      display: flex;
+      gap: var(--space-4);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border);
+      align-items: flex-start;
+    }
+    .step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step:first-child { padding-top: 0; }
+    .step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--color-text);
+      color: #fff;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.1em;
+    }
+    .step-content strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.15em;
+    }
+    .step-content span {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ───── Domains ───── */
+    .domains {
+      margin-bottom: var(--space-8);
+    }
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--space-2);
+    }
+    .domain-chip {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2) var(--space-3);
+      font-size: 0.825rem;
+      color: var(--color-text);
+      font-weight: 500;
+      box-shadow: var(--shadow-sm);
+    }
+    .domain-chip.soon {
+      background: var(--color-surface-2);
+      color: var(--color-text-muted);
+      border-style: dashed;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-ok { background: var(--color-success); }
+    .dot-soon { background: var(--color-text-faint); }
+
+    /* ───── QUALIOPI tag ───── */
+    .qualiopi-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-success-light);
+      border: 1px solid oklch(from var(--color-success) l c h / 0.2);
+      border-radius: var(--radius-full);
+      padding: 0.3em 0.9em;
+      font-size: 0.775rem;
+      font-weight: 600;
+      color: var(--color-success);
+      margin-bottom: var(--space-6);
+      letter-spacing: 0.03em;
+    }
+
+    /* ───── CTA Footer ───── */
+    .cta-block {
+      background: var(--color-text);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8) var(--space-10);
+      margin-bottom: var(--space-6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 200px;
+      background: radial-gradient(circle, oklch(0.55 0.12 192 / 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-block h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: var(--space-2);
+      line-height: 1.2;
+    }
+    .cta-block p {
+      color: oklch(1 0 0 / 0.55);
+      font-size: 0.9rem;
+      margin: 0 auto var(--space-6);
+      max-width: 44ch;
+    }
+    .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: oklch(1 0 0 / 0.07);
+      border: 1px solid oklch(1 0 0 / 0.12);
+      border-radius: var(--radius-full);
+      padding: 0.45em 1em;
+      color: #fff;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .contact-item:hover { background: oklch(1 0 0 / 0.13); }
+    .contact-item .ci-icon { opacity: 0.6; font-size: 0.75rem; }
+    .legal-info {
+      font-size: 0.725rem;
+      color: oklch(1 0 0 / 0.28);
+      letter-spacing: 0.02em;
+    }
+
+    /* ───── Footer ───── */
+    .doc-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--color-text-faint);
+      padding-bottom: var(--space-4);
+    }
+
+    /* ───── Print styles ───── */
+    @media print {
+      body { background: #fff; }
+      .wrapper { padding: 0; }
+      .header, .cta-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-row">
+      <div class="logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-label="DB Formation logo">
+          <rect x="3" y="3" width="7" height="10" rx="1.5" fill="white" opacity="0.9"/>
+          <rect x="3" y="15" width="7" height="6" rx="1.5" fill="white" opacity="0.5"/>
+          <rect x="12" y="3" width="9" height="6" rx="1.5" fill="white" opacity="0.5"/>
+          <rect x="12" y="11" width="9" height="10" rx="1.5" fill="white" opacity="0.9"/>
+        </svg>
+      </div>
+      <span class="logo-text">DB Formation</span>
+      <span class="badge">Mai 2026</span>
+    </div>
+    <div class="header-eyebrow">Offre exclusive</div>
+    <h1>Support Post-Formation<br><em>au-delà de la session</em></h1>
+    <p class="header-sub">Une base de connaissances alignée sur vos formations, accessible 18 mois après la fin du cours.</p>
+  </header>
+
+  <!-- QUALIOPI -->
+  <div class="qualiopi-tag">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5"/></svg>
+    Offre conforme et renforcée QUALIOPI
+  </div>
+
+  <!-- Problème / Solution -->
+  <div class="problem-solution">
+    <div class="ps-card">
+      <div class="ps-label">Le constat</div>
+      <p>Après la formation, vos apprenants se retrouvent seuls face à leurs outils. Les manuels génériques ne reflètent pas vos méthodes ni vos exemples.</p>
+    </div>
+    <div class="ps-card solution">
+      <div class="ps-label">Notre réponse</div>
+      <p>Une base de connaissances modulaire, calquée sur votre formation, accessible en ligne 24/7 pendant <strong>18 mois</strong>.</p>
+    </div>
+  </div>
+
+  <!-- Ce qu'ils reçoivent -->
+  <div class="benefits">
+    <p class="section-title">Ce que vos apprenants reçoivent</p>
+    <div class="benefit-item">
+      <div class="benefit-icon">📄</div>
+      <div class="benefit-content">
+        <strong>Contenu calqué sur la formation</strong>
+        <span>Mêmes exemples, même progression, même structure pédagogique</span>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">📱</div>
+      <div class="benefit-content">
+        <strong>Accès multiformat</strong>
+        <span>Plateforme web (ordinateur, tablette) + PDF téléchargeable hors ligne</span>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">✅</div>
+      <div class="benefit-content">
+        <strong>Quiz de consolidation par module</strong>
+        <span>Pour valider et ancrer les acquis après la session</span>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">📧</div>
+      <div class="benefit-content">
+        <strong>Support par email</strong>
+        <span>Réponses sous 48h pour les questions post-formation, par le formateur</span>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🔄</div>
+      <div class="benefit-content">
+        <strong>Contenu mis à jour en continu</strong>
+        <span>Intégration des retours apprenants, pas un PDF figé</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarification -->
+  <div class="pricing-wrap">
+    <p class="section-title">Tarification par volume</p>
+    <div class="pricing-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Domaine</th>
+            <th>1–6 apprenants</th>
+            <th>7–12</th>
+            <th>13+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Excel Initiation</td>
+            <td>20 €/pers.</td>
+            <td>18 €/pers.</td>
+            <td class="tier-best">15 €/pers.</td>
+          </tr>
+          <tr>
+            <td>Word Initiation</td>
+            <td>20 €/pers.</td>
+            <td>18 €/pers.</td>
+            <td class="tier-best">15 €/pers.</td>
+          </tr>
+          <tr>
+            <td>Excel Perfectionnement</td>
+            <td>25 €/pers.</td>
+            <td>23 €/pers.</td>
+            <td class="tier-best">20 €/pers.</td>
+          </tr>
+          <tr>
+            <td>Excel Tables & TCD</td>
+            <td>25 €/pers.</td>
+            <td>23 €/pers.</td>
+            <td class="tier-best">20 €/pers.</td>
+          </tr>
+          <tr>
+            <td>Word Perfectionnement</td>
+            <td>25 €/pers.</td>
+            <td>23 €/pers.</td>
+            <td class="tier-best">20 €/pers.</td>
+          </tr>
+          <tr>
+            <td>Migration Libre & Souveraine</td>
+            <td>25 €/pers.</td>
+            <td>23 €/pers.</td>
+            <td class="tier-best">20 €/pers.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="pricing-note">Windows 11, PowerPoint, Office 365 : en développement — tarification à confirmer. Aucun volume minimum. Facturation sur apprenants réels.</p>
+  </div>
+
+  <!-- Callout économie -->
+  <div class="saving-callout">
+    <span class="callout-icon">💡</span>
+    <p class="callout-text">
+      <strong>Exemple : 15 apprenants Excel Initiation = 225 €</strong> chez DB Formation.<br>
+      Le même accès chez ENI : 375 € à 675 €. Soit jusqu'à <strong>450 € d'économie par formation</strong>.
+    </p>
+  </div>
+
+  <!-- Comparatif -->
+  <div class="compare-wrap">
+    <p class="section-title">DB Formation vs ENI</p>
+    <div class="compare-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Critère</th>
+            <th>DB Formation</th>
+            <th>ENI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Alignement pédagogique</td>
+            <td class="good">Calqué sur votre formation</td>
+            <td class="neutral">Contenu générique</td>
+          </tr>
+          <tr>
+            <td>Prix</td>
+            <td class="good">15–25 €/apprenant</td>
+            <td class="neutral">25–45 €/apprenant</td>
+          </tr>
+          <tr>
+            <td>Réactivité modifications</td>
+            <td class="good">Rapide, sur demande</td>
+            <td class="neutral">Processus éditorial plus long</td>
+          </tr>
+          <tr>
+            <td>Support apprenant</td>
+            <td class="good">Par le formateur lui-même</td>
+            <td class="neutral">Support délocalisé</td>
+          </tr>
+          <tr>
+            <td>Relation post-formation</td>
+            <td class="good">Continue avec le formateur</td>
+            <td class="neutral">Rupture à la fin de session</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Mise en place -->
+  <div class="steps">
+    <p class="section-title">Tout clé en main, zéro charge</p>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Une formalisation en 5 minutes</strong>
+        <span>Avenant à votre contrat existant, ou contrat cadre d'une page pour les nouveaux partenaires. Opérationnel sous 3 à 5 jours.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>On s'occupe de tout à la fin de chaque session</strong>
+        <span>Transmettez-nous la liste des apprenants — nous activons les accès sous 24h et envoyons les identifiants directement par email.</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Vos apprenants sont autonomes dès le lendemain</strong>
+        <span>Accès immédiat à la plateforme, 18 mois de ressources disponibles. Aucune action supplémentaire de votre part.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Domaines -->
+  <div class="domains">
+    <p class="section-title">Domaines disponibles</p>
+    <div class="domain-grid">
+      <div class="domain-chip"><span class="dot dot-ok"></span>Excel Initiation</div>
+      <div class="domain-chip"><span class="dot dot-ok"></span>Excel Perfectionnement</div>
+      <div class="domain-chip"><span class="dot dot-ok"></span>Excel Tables &amp; TCD</div>
+      <div class="domain-chip"><span class="dot dot-ok"></span>Word Initiation</div>
+      <div class="domain-chip"><span class="dot dot-ok"></span>Word Perfectionnement</div>
+      <div class="domain-chip"><span class="dot dot-ok"></span>Migration Libre &amp; Souveraine</div>
+      <div class="domain-chip soon"><span class="dot dot-soon"></span>Windows 11 (bientôt)</div>
+      <div class="domain-chip soon"><span class="dot dot-soon"></span>PowerPoint (bientôt)</div>
+      <div class="domain-chip soon"><span class="dot dot-soon"></span>Office 365 (bientôt)</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>Prêt à prolonger la valeur de vos formations ?</h2>
+    <p>Contactez-nous pour une démonstration ou une discussion sans engagement.</p>
+    <div class="contact-grid">
+      <a href="mailto:billaud.david@pm.me" class="contact-item" target="_blank" rel="noopener noreferrer">
+        <span class="ci-icon">✉</span> billaud.david@pm.me
+      </a>
+      <a href="tel:+262693900048" class="contact-item">
+        <span class="ci-icon">📱</span> +262 693 90 00 48
+      </a>
+      <a href="https://dbformation.tech" class="contact-item" target="_blank" rel="noopener noreferrer">
+        <span class="ci-icon">🌍</span> dbformation.tech
+      </a>
+    </div>
+    <p class="legal-info">SIRET 51398626500017 — Déclaration d'activité 04 973 176 597 (Préfet de la Région Réunion)</p>
+  </div>
+
+  <p class="doc-footer">Document commercial — DB FORMATION — Tous droits réservés — Mai 2026</p>
+</div>
+</body>
+</html>
